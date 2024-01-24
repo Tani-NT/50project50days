@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        .container{
+            display: flex;
+            width: 90vw;
+        }
+        .card{
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 80vh;
+            border-radius: 50px;
+            cursor: pointer;
+            color: #fff;
+            flex: 0.5;
+            margin: 10px;
+            position: relative;
+            transition: flex 0.7s ease-in;
+        }
+        .card h4{
+            font-size: 24px;
+            position:absolute;
+            bottom: 20px;
+            margin: 0;
+            left: 20px;
+            opacity: 0;
+        }
+        .card.active{
+            flex: 5;
+        }
+        .card.active h4{
+            opacity: 1;
+            transition: 0.3s ease-in 0.4s;
+        }
+        @media(max-width: 480px){
+            .container{
+                width: 100vw;
+            }
+            .card:nth-of-type(4),
+            .card:nth-of-type(5){
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card active" style="background-image: url('https://images.pexels.com/photos/16857317/pexels-photo-16857317/free-photo-of-cake-with-fruits.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load');">
+            <h4>Strawberry Cake</h4>
+        </div>
+        <div class="card" style="background-image: url('https://images.pexels.com/photos/19841819/pexels-photo-19841819/free-photo-of-a-narrow-street-with-many-colorful-rugs-and-carpets.png?auto=compress&cs=tinysrgb&w=600&lazy=load');">
+            <h4>Carpet</h4>
+        </div>
+        <div class="card" style="background-image: url('https://images.pexels.com/photos/18032639/pexels-photo-18032639/free-photo-of-photo-of-a-sandy-beach.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load');">
+            <h4>Beach</h4>
+        </div>
+        <div class="card" style="background-image: url('https://images.pexels.com/photos/11844123/pexels-photo-11844123.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load');">
+            <h4>Lighthouse</h4>
+        </div>
+        <div class="card" style="background-image: url('https://images.pexels.com/photos/17425646/pexels-photo-17425646/free-photo-of-railway-track-on-bridge.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load');">
+            <h4>Railway Track</h4>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            card.addEventListener('click',() => {
+                removeActiveClasses()
+                card.classList.add('active')
+        })
+        })
+        function removeActiveClasses(){
+            cards.forEach(card =>{
+                card.classList.remove('active')
+            })
+        }
+    </script>
+</body>
+</html>
+
+
