@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --line-border-fill: #3498db;
+            --line-border-empty: #e0e0e0;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+        .steps-container{
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 4px;
+            width: 100%;
+            gap: 20px;
+            background-color: var(--line-border-empty);
+        }
+        .steps{
+            height: 70px;
+            width: 70px;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 6px solid grey;
+            border-radius: 50%;
+            margin: 20px;
+        }
+        .progress{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-container{
+            margin-top: 50px;
+            font-size: 30px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-container button{
+            font-size: x-large;
+            font-family: monospace;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="steps-container">
+            <div class="progress" id="progress">
+                <div class="steps active">1</div>
+                <div class="steps">2</div>
+                <div class="steps">3</div>
+                <div class="steps">4</div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button id="prevBtn">Prev</button>
+            <button id="nextBtn">Next</button>
+        </div>
+        
+    </div>
+</body>
+<script>
+    const prevBtn = document.querySelector("#prevBtn");
+    const nextBtn = document.querySelector("#nextBtn");
+    const progress = document.querySelector(".progress");
+ 
+
+    // // array for steps
+    // const requiredSteps = ["1","2","3","4"];
+    // requiredSteps.forEach((step) => {
+    //     const myStep = document.createElement("div");
+    //     myStep.classList.add("steps");
+    //     myStep.innerText = step;
+    //     progress.appendChild(myStep);
+    // });
+
+    // getting steps from the array 
+    let steps = document.querySelectorAll(".steps");
+    steps = Array.from(steps);
+    let index = 0;
+
+    nextBtn.addEventListener("click",()=>{
+        if(index < steps.length){
+            index++;
+            borderColorToRed();
+        }
+        disableButton();
+    })
+    prevBtn.addEventListener("click",()=>{
+        if(index !== 0){
+            index--;
+            borderColorToGray();
+        }
+        disableButton();
+    })
+
+    const borderColorToRed = () => {
+        for(let i = 0; i<=index; i++){
+            steps[i].style.borderColor = "blue";
+        }
+    }
+    borderColorToRed();
+    
+
+    const borderColorToGray = () => {
+        for(let i = index+1; i< steps.length; i++){
+            steps[i].style.borderColor = "gray";
+        }
+    }
+
+    const disableButton = () => {
+        if(index === 0){
+            prevBtn.setAttribute("disabled",true);
+        }
+        else{
+            prevBtn.removeAttribute("disabled");
+        }
+        if(index === steps.length-1){
+            nextBtn.setAttribute("disabled",true);
+        }
+        else{
+            nextBtn.removeAttribute("disabled");
+        }
+    };
+    disableButton();
+
+    const progressLine = () => {
+        nextBtn.addEventListener("click",()=>{
+            steps.style.border = "1px solid black";
+        })
+    }
+
+</script>
+</html>
